@@ -41,6 +41,11 @@ class Movie(db.Model):
     released_at = db.Column(db.DateTime, nullable=False)
     imdb_url = db.Column(db.String(200), nullable=False)
 
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return f"<Movie movie_id={self.movie_id} title={self.title}>"
+
 
 class Rating(db.Model):
     """Movie rating for ratings website."""
@@ -54,6 +59,14 @@ class Rating(db.Model):
 
     movie = db.relationship('Movie', backref='rating')
     user = db.relationship('User', backref='rating')
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return f"""<Rating rating_id={self.rating_id} 
+                   movie_id={self.movie_id} 
+                   user_id={self.user_id} 
+                   score={self.score}>"""
 
 
 ##############################################################################
