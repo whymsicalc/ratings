@@ -57,8 +57,8 @@ class Rating(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     score = db.Column(db.Integer, nullable=False)
 
-    movie = db.relationship('Movie', backref='rating')
-    user = db.relationship('User', backref='rating')
+    movie = db.relationship('Movie', backref=db.backref('rating', order_by=rating_id))
+    user = db.relationship('User', backref=db.backref('rating', order_by=rating_id))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
