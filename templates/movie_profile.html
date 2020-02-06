@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Profile for {{movie.title}}</h1>
+<ul>
+    <li>Release Date: {{movie.released_at}}</li>
+    <li><a href="{{movie.imdb_url}}">Link to IMDB</a></li>
+</ul>
+{% if "user_id" in session %}
+    <p>Add a rating!</p>
+    <form action="/movies/{{movie.movie_id}}" method="POST">
+        <label>Rate this movie:</label>
+        <input type="radio" name="rating" value="1"><label>1</label>
+        <input type="radio" name="rating" value="2"><label>2</label>
+        <input type="radio" name="rating" value="3"><label>3</label>
+        <input type="radio" name="rating" value="4"><label>4</label>
+        <input type="radio" name="rating" value="5"><label>5</label>
+        <input type="submit">
+    </form>
+{% endif %}
+<ul>
+    <li>Movie Ratings:</li>
+    <ul>
+        {% for rating in ratings %}
+        <li>User {{rating.user.user_id}} rated this a {{rating.score}}</li>
+        {% endfor %}
+    </ul>
+</ul>
+
+
+
+
+{% endblock %}
